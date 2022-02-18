@@ -77,7 +77,7 @@ tanzu package installed list -A
 alias kc=kubectl
 
 vi tap-values.yml (setup configuration…)
-tanzu package installed update tap --package-name tap.tanzu.vmware.com --version 1.0.0 --values-file tap-values.yml -n tap-install
+tanzu package install tap --package-name tap.tanzu.vmware.com --version 1.0.0 --values-file tap-values.yml -n tap-install
 
 //setup DNS
 kubectl get service envoy -n tanzu-system-ingress
