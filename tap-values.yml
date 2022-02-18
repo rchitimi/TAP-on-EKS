@@ -1,0 +1,55 @@
+profile: full
+ceip_policy_disclosed: true # Installation fails if this not set to `true`
+buildservice:
+  kp_default_repository: "jkhantapcr.azurecr.io/build-service"
+  kp_default_repository_username: "taptoken"
+  kp_default_repository_password: token
+  tanzunet_username: "youremail@vmware.com"
+  tanzunet_password: "password"
+  descriptor_name: "tap-1.0.0-full"
+  enable_automatic_dependency_updates: true
+supply_chain: basic
+
+cnrs:
+  domain_name: tap.jkcloudmesh.com
+
+ootb_supply_chain_basic:
+  registry:
+    server: "jkhantapcr.azurecr.io"
+    repository: "supply-chain"
+  gitops:
+    ssh_secret: ""
+
+learningcenter:
+  ingressDomain: "learningcenter.jkcloudmesh.com"
+
+tap_gui:
+  service_type: ClusterIP
+  ingressEnabled: "true"
+  ingressDomain: "tap.jkcloudmesh.com"
+  app_config:
+    app:
+      baseUrl: http://tap-gui.tap.jkcloudmesh.com
+    catalog:
+      locations:
+        - type: url
+          target: https://github.com/jkhan24558/TAP-Catalog/blob/main/catalog-info.yaml
+    backend:
+      baseUrl: http://tap-gui.tap.jkcloudmesh.com
+      cors:
+        origin: http://tap-gui.tap.jkcloudmesh.com
+
+    integrations:
+      github:
+        - host: github.com
+          token: "token"
+contour:
+  envoy:
+    service:
+      type: LoadBalancer
+
+metadata_store:
+  app_service_type: LoadBalancer # (optional) Defaults to LoadBalancer. Change to NodePort for distributions that don't support LoadBalancer
+
+grype:
+  targetImagePullSecret: "tap-cr-registry"
